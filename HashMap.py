@@ -54,6 +54,9 @@ class HashMap:
 
 if __name__ == "__main__":
     h = HashMap()
+    h2 = HashMap()
+    h[(1, 3)] = 4
+    h[h2] = "The key for this entry is a hashmap."
     for (index, letter) in enumerate("hashmap"):
         h[letter] = index
     print("hashmap has {}/{} items".format(len(h), h.capacity))
