@@ -89,6 +89,6 @@ if __name__ == "__main__":
     for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyz"):
         del h[letter]
     print(h)
-    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyzz"):
+    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyz"):
         h[letter] = index
     print(h)
