@@ -48,7 +48,7 @@ class HashMap:
         return hash(key) & 0x7fffffff % self.capacity
 
     # noinspection PyTupleAssignmentBalance
-    # TODO
+    # TODO -- this doesn't actually work right now.
     def __delitem__(self, key):
         # Easy case and hard case.  Easy: None or hit -- set to None if hit (!). Hard: no hit but not None.
         # Then you have to rehash everything in a potential cluster.
