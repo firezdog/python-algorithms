@@ -4,16 +4,16 @@ class HashMap:
         self.load = 0
         self.capacity = capacity
         self.skip = skip
-        self.list = [None] * capacity
+        self.list = [(None, None)] * capacity
 
     def resize(self, new_size):
         old_list = self.list
         old_load = self.load
         self.capacity = new_size
-        self.list = [None] * new_size
+        self.list = [(None, None)] * new_size
         for kv_pair in old_list:
-            if kv_pair is not None:
-                key, value = kv_pair
+            key, value = kv_pair
+            if key is not None:
                 self.put(key, value)
         self.load = old_load
 
@@ -22,21 +22,21 @@ class HashMap:
         if self.load / self.capacity > 0.5:
             self.resize(self.capacity * 2)
         key_hash = self.make_hash(key)
-        result = self.list[key_hash]
-        while result is not None:
-            if result[0] is key:
+        result_key, _ = self.list[key_hash]
+        while result_key is not None:
+            if result_key == key:
                 self.load -= 1
                 break
             key_hash = self.rehash(key_hash)
-            result = self.list[key_hash]
+            result_key, _ = self.list[key_hash]
         self.list[key_hash] = (key, value)
 
     def get(self, key):
         key_hash = self.make_hash(key)
-        result = self.list[key_hash]
-        while result is not None:
-            if result[0] == key:
-                return result[1]
+        result_key, result_value = self.list[key_hash]
+        while result_key is not None:
+            if result_key == key:
+                return result_value
             else:
                 key_hash = self.rehash(key_hash)
                 result = self.list[key_hash]
@@ -47,7 +47,6 @@ class HashMap:
     def make_hash(self, key):
         return hash(key) & 0x7fffffff % self.capacity
 
-    # noinspection PyTupleAssignmentBalance
     # TODO -- this doesn't actually work right now.
     def __delitem__(self, key):
         # Easy case and hard case.  Easy: None or hit -- set to None if hit (!). Hard: no hit but not None.
@@ -81,10 +80,10 @@ class HashMap:
 
     def __str__(self):
         rep = 'Hashmap has {}/{} items:\n'.format(self.load, self.capacity)
-        for item in self.list:
-            if item is None:
+        for key, value in self.list:
+            if key is None:
                 continue
-            rep += "{}: {}\n".format(item[0], item[1])
+            rep += "{}: {}\n".format(key, value)
         return rep
 
 
