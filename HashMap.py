@@ -25,6 +25,7 @@ class HashMap:
         result_key, _ = self.list[key_hash]
         while result_key is not None:
             if result_key == key:
+                self.list[key_hash] = (key, value)
                 self.load -= 1
                 break
             key_hash = self.rehash(key_hash)
@@ -47,25 +48,20 @@ class HashMap:
     def make_hash(self, key):
         return hash(key) & 0x7fffffff % self.capacity
 
-    # TODO -- this doesn't actually work right now.
+    '''should be very simple: go through all the entries in the cluster -- take out and put each one back in
+    except the delendum'''
     def __delitem__(self, key):
-        hashed_key = self.make_hash(key)
-        rehashed_key = self.rehash(hashed_key)
-        next_key, _ = self.list[hashed_key]
-        while next_key != key:
-            if next_key is None:
-                return
-            rehashed_key = self.rehash(rehashed_key)
-            next_key, _ = self.list[rehashed_key]
-        # now we replace each kv pair with the next kv pair in the cluster
-        # OOPS -- this doesn't work because we don't get to loop back around the array.
-        # This is more like deleting a link from a linked list WITH A CYCLE
+        rehash = self.make_hash(key)
+        next_key, next_value = self.list[rehash]
         while next_key is not None:
-            current_hash = rehashed_key
-            rehashed_key = self.rehash(rehashed_key)
-            next_key, next_value = self.list[rehashed_key]
-            self.list[current_hash] = (next_key, next_value)
-        self.load -= 1
+            self.load -= 1  # canceled out if it gets put back in
+            self.list[rehash] = (None, None)
+            if next_key != key:
+                self.put(next_key, next_value)
+            rehash = self.rehash(rehash)
+            next_key, next_value = self.list[rehash]
+        if (self.load / self.capacity) < (1/8):
+            self.resize(int(self.capacity / 2))
 
     def __getitem__(self, item):
         return self.get(item)
@@ -87,8 +83,12 @@ class HashMap:
 
 if __name__ == "__main__":
     h = HashMap()
-    for (index, letter) in enumerate("ab"):
+    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyzzzzzzzzzz"):
         h[letter] = index
     print(h)
-    del h['a']
+    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyz"):
+        del h[letter]
+    print(h)
+    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyzz"):
+        h[letter] = index
     print(h)
