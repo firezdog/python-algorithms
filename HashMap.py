@@ -49,24 +49,22 @@ class HashMap:
 
     # TODO -- this doesn't actually work right now.
     def __delitem__(self, key):
-        # Easy case and hard case.  Easy: None or hit -- set to None if hit (!). Hard: no hit but not None.
-        # Then you have to rehash everything in a potential cluster.
-        # This duplicates some of the get() logic above
-        # -- but that method doesn't distinguish between initial hit and later hit.
-        # (!) not quite -- if you set a hash at the start of a chain to None, gets
-        # for everything in the chain will fail from then on. Everything in the chain if it exists always has to be
-        # moved "down".  This is just like removing a node from a linked list, considered under a certain light.
         hashed_key = self.make_hash(key)
-        entry = self.list[hashed_key]
-        if entry is None:
-            return
-        next_key, _ = entry
         rehashed_key = self.rehash(hashed_key)
-        # move down the chain until we get a hit or None; if the former, start adjustment; if the latter, escape
+        next_key, _ = self.list[hashed_key]
         while next_key != key:
-            entry = self.list[rehashed_key]
-            next_key, _ = entry
+            if next_key is None:
+                return
             rehashed_key = self.rehash(rehashed_key)
+            next_key, _ = self.list[rehashed_key]
+        # now we replace each kv pair with the next kv pair in the cluster
+        # OOPS -- this doesn't work because we don't get to loop back around the array.
+        # This is more like deleting a link from a linked list WITH A CYCLE
+        while next_key is not None:
+            current_hash = rehashed_key
+            rehashed_key = self.rehash(rehashed_key)
+            next_key, next_value = self.list[rehashed_key]
+            self.list[current_hash] = (next_key, next_value)
         self.load -= 1
 
     def __getitem__(self, item):
@@ -89,7 +87,7 @@ class HashMap:
 
 if __name__ == "__main__":
     h = HashMap()
-    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyz"):
+    for (index, letter) in enumerate("ab"):
         h[letter] = index
     print(h)
     del h['a']
