@@ -87,16 +87,3 @@ class HashMap:
                 continue
             rep += "{}: {}\n".format(key, value)
         return rep
-
-
-if __name__ == "__main__":
-    h = HashMap()
-    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyzzzzzzzzzz"):
-        h[letter] = index
-    print(h)
-    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyz"):
-        del h[letter]
-    print(h)
-    for (index, letter) in enumerate("abcdefghijklmnopqrstuvwxyz"):
-        h[letter] = index
-    print(h)
