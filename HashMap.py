@@ -18,6 +18,8 @@ class HashMap:
         self.load = old_load
 
     def put(self, key, value):
+        if key is None or value is None:
+            raise ValueError("Key / value cannot be None.")
         self.load += 1
         if self.load / self.capacity > 0.5:
             self.resize(self.capacity * 2)
@@ -33,14 +35,17 @@ class HashMap:
         self.list[key_hash] = (key, value)
 
     def get(self, key):
+        if key is None:
+            raise ValueError("Invalid search value: None.")
         key_hash = self.make_hash(key)
         result_key, result_value = self.list[key_hash]
         while result_key is not None:
             if result_key == key:
-                return result_value
+                break
             else:
                 key_hash = self.rehash(key_hash)
-                result = self.list[key_hash]
+                result_key, result_value = self.list[key_hash]
+        return result_value
 
     def rehash(self, old_hash):
         return (old_hash + self.skip) % self.capacity
@@ -71,6 +76,9 @@ class HashMap:
 
     def __len__(self):
         return self.load
+
+    def defines(self, item):
+        return self.get(item) is not None
 
     def __str__(self):
         rep = 'Hashmap has {}/{} items:\n'.format(self.load, self.capacity)
