@@ -1,5 +1,5 @@
 from unittest import TestCase
-from HashMap import HashMap
+from HashMap.HashMap import HashMap
 
 
 class TestHashMap(TestCase):
