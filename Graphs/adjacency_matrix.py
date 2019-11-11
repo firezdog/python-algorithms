@@ -4,9 +4,9 @@ from Graphs.graph import Graph, Vertex
 
 class AdjacencyMatrix(Graph):
     def __init__(self, vertices: int):
-        self.vertices = [[False for y in range(vertices)] for x in range(vertices)]
+        self.vertices = [[10 for y in range(vertices)] for x in range(vertices)]
 
-    # requires recreating the entire matrix with the extra vertex!
+    # requires adding an extra column to each row and an extra row to represent the new vertex
     def add_vertex(self, vertex: Vertex) -> None:
         pass
 
@@ -23,18 +23,22 @@ class AdjacencyMatrix(Graph):
         pass
 
     def __str__(self):
-        rep = '{:3}'.format('')
-        for index, _ in enumerate(self.vertices):
-            rep += '{:3}V{}'.format('', index)
+        largest_vertex_string_length = 1 + len(str(len(self.vertices) - 1))
+        rep = ' ' * largest_vertex_string_length
+        for index, item in enumerate(self.vertices):
+            header_length = len('V' + str(index))
+            grid_length = len(item[0].__str__()) + 1
+            separator = ' ' * (grid_length)
+            rep += '{}V{}'.format(separator, index)
         rep += '\n'
         for index, vertex in enumerate(self.vertices):
-            rep += 'V{}'.format(index)
+            rep += 'V{}{}'.format(index, ' ' * (largest_vertex_string_length - len('V' + str(index))))
             for edge in vertex:
-                rep += '{:4}{}'.format('', int(edge))
+                rep += '{}{}'.format(' ' * (largest_vertex_string_length + len(edge.__str__())), edge)
             rep += '\n'
         return rep
 
 
 if __name__ == '__main__':
-    adjacency_matrix = AdjacencyMatrix(10)
+    adjacency_matrix = AdjacencyMatrix(20)
     print(adjacency_matrix)
