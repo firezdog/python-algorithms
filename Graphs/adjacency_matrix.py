@@ -1,9 +1,8 @@
-from interface import implements
 from typing import List
 from Graphs.graph import Graph, Vertex
 
 
-class AdjacencyMatrix(implements(Graph)):
+class AdjacencyMatrix(Graph):
     def __init__(self, vertices: int):
         self.vertices = [[False for y in range(vertices)] for x in range(vertices)]
 
