@@ -4,7 +4,11 @@ from Graphs.graph import Graph, Vertex
 
 class AdjacencyMatrix(Graph):
     def __init__(self, vertices: int):
-        self.vertices = [[10 for y in range(vertices)] for x in range(vertices)]
+        self.cell_size = 6
+        self.vertices = [[False for y in range(vertices)] for x in range(vertices)]
+
+    def set_cell_size(self, cell_size: int) -> None:
+        self.cell_size = cell_size
 
     # requires adding an extra column to each row and an extra row to represent the new vertex
     def add_vertex(self, vertex: Vertex) -> None:
@@ -23,22 +27,21 @@ class AdjacencyMatrix(Graph):
         pass
 
     def __str__(self):
-        largest_vertex_string_length = 1 + len(str(len(self.vertices) - 1))
-        rep = ' ' * largest_vertex_string_length
-        for index, item in enumerate(self.vertices):
-            header_length = len('V' + str(index))
-            grid_length = len(item[0].__str__()) + 1
-            separator = ' ' * (grid_length)
-            rep += '{}V{}'.format(separator, index)
+        rep = ' ' * self.cell_size
+        for i, row in enumerate(self.vertices):
+            col_header = 'V{}'.format(i)
+            rep += '{}{}'.format(col_header, ' ' * (self.cell_size - len(col_header)))
         rep += '\n'
-        for index, vertex in enumerate(self.vertices):
-            rep += 'V{}{}'.format(index, ' ' * (largest_vertex_string_length - len('V' + str(index))))
-            for edge in vertex:
-                rep += '{}{}'.format(' ' * (largest_vertex_string_length + len(edge.__str__())), edge)
+        for i, row in enumerate(self.vertices):
+            row_header = 'V{}'.format(i)
+            rep += '{}{}'.format(row_header, ' ' * (self.cell_size - len(row_header)))
+            for edge in row:
+                rep += str(edge) + ' ' * (self.cell_size - len(str(edge)))
             rep += '\n'
         return rep
 
 
 if __name__ == '__main__':
-    adjacency_matrix = AdjacencyMatrix(20)
+    adjacency_matrix = AdjacencyMatrix(5)
+    adjacency_matrix.set_cell_size(10)
     print(adjacency_matrix)
