@@ -26,7 +26,7 @@ class AdjacencyMatrix(Graph):
     def __contains__(self, item: Vertex) -> bool:
         pass
 
-    def __str__(self):
+    def render(self):
         rep = ' ' * self.cell_size
         for i, row in enumerate(self.vertices):
             col_header = 'V{}'.format(i)
@@ -44,4 +44,4 @@ class AdjacencyMatrix(Graph):
 if __name__ == '__main__':
     adjacency_matrix = AdjacencyMatrix(5)
     adjacency_matrix.set_cell_size(10)
-    print(adjacency_matrix)
+    print(adjacency_matrix.render())
