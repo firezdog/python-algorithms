@@ -44,4 +44,6 @@ class AdjacencyMatrix(Graph):
 if __name__ == '__main__':
     adjacency_matrix = AdjacencyMatrix(5)
     adjacency_matrix.set_cell_size(10)
+    adjacency_matrix.vertices[0][0] = 'dog'
+    adjacency_matrix.vertices[0][3] = 'elephant'
     print(adjacency_matrix.render())
