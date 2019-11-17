@@ -1,0 +1,44 @@
+import sys
+from types import SimpleNamespace
+from Graphs.adjacency_matrix import AdjacencyMatrix
+from Graphs.GraphFactory import build_graph_from_file
+
+
+def degree(graph: AdjacencyMatrix, vertex):
+    return len(graph.get_adjacent(vertex))
+
+
+def max_degree(graph: AdjacencyMatrix):
+    maximum = 0
+    for vertex in range(graph.get_num_vertices()):
+        next_degree = degree(graph, vertex)
+        if next_degree > maximum:
+            maximum = next_degree
+    return maximum
+
+
+def self_loops(graph: AdjacencyMatrix):
+    loops = 0
+    for vertex in range(graph.get_num_vertices()):
+        adjacent = graph.get_adjacent(vertex)
+        if vertex in adjacent:
+            loops += 1
+    return loops
+
+
+def average_degree(graph: AdjacencyMatrix):
+    sum_deg = 0
+    num_vertices = graph.get_num_vertices()
+    for vertex in range(num_vertices):
+        sum_deg += degree(graph, vertex)
+    return sum_deg / num_vertices
+
+
+if __name__ == '__main__':
+    file_name = sys.argv[1]
+    this = SimpleNamespace()
+    this.graph = build_graph_from_file('sample_graph.txt', AdjacencyMatrix)
+    print(degree(this.graph, 0))
+    print(max_degree(this.graph))
+    print(average_degree(this.graph))
+    print(self_loops(this.graph))

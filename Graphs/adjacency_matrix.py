@@ -13,15 +13,22 @@ class AdjacencyMatrix:
             raise ValueError("weight must be non-zero int")
         self.matrix[from_vertex][to_vertex] = weight
         self.matrix[to_vertex][from_vertex] = weight
-        self.edges.add((from_vertex, to_vertex))
-        self.edges.add((to_vertex, from_vertex))
+        edge = frozenset({from_vertex, to_vertex})
+        self.edges.add(edge)
 
     def get_edges(self):
         return self.edges
 
+    # note -- for an undirected graph, an edge from A to B counts as an edge from B to A, so...how many edges?
+    def get_num_edges(self):
+        return len(self.edges)
+
     def get_edge(self, vertex_a, vertex_b):
         # prob faster than iterating through edge list
         return self.matrix[vertex_a][vertex_b] != 0
+
+    def get_num_vertices(self):
+        return len(self.matrix)
 
     def get_adjacent(self, vertex_a):
         adjacent = list()
@@ -30,7 +37,7 @@ class AdjacencyMatrix:
                 adjacent.append(vertex)
         return adjacent
 
-    def render(self):
+    def render(self, print_out=True):
         rep = ' ' * self.cell_size
         for i, row in enumerate(self.matrix):
             col_header = 'V{}'.format(i)
@@ -42,4 +49,7 @@ class AdjacencyMatrix:
             for edge in row:
                 rep += str(edge) + ' ' * (self.cell_size - len(str(edge)))
             rep += '\n' if i < len(self.matrix) - 1 else ''
-        print(rep)
+        if print_out:
+            print(rep)
+        return rep
+
