@@ -1,14 +1,17 @@
 import sys
 from types import SimpleNamespace
+
+from Graphs.Graph import Graph
 from Graphs.adjacency_matrix import AdjacencyMatrix
 from Graphs.GraphFactory import build_graph_from_file
 
 
-def degree(graph: AdjacencyMatrix, vertex):
+# the number of edges at a given node
+def degree(graph: Graph, vertex):
     return len(graph.get_adjacent(vertex))
 
 
-def max_degree(graph: AdjacencyMatrix):
+def max_degree(graph: Graph):
     maximum = 0
     for vertex in range(graph.get_num_vertices()):
         next_degree = degree(graph, vertex)
@@ -17,7 +20,8 @@ def max_degree(graph: AdjacencyMatrix):
     return maximum
 
 
-def self_loops(graph: AdjacencyMatrix):
+# the number of nodes with edges leading back to themselves.
+def self_loops(graph: Graph):
     loops = 0
     for vertex in range(graph.get_num_vertices()):
         adjacent = graph.get_adjacent(vertex)

@@ -1,4 +1,7 @@
-class AdjacencyMatrix:
+from Graphs.Graph import Graph
+
+
+class AdjacencyMatrix(Graph):
     def __init__(self, num_vertices):
         self.cell_size = 6
         self.matrix = [[0 for y in range(num_vertices)] for x in range(num_vertices)]
