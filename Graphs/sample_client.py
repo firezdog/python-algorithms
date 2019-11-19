@@ -3,6 +3,7 @@ from types import SimpleNamespace
 
 from Graphs.Graph import Graph
 from Graphs.adjacency_matrix import AdjacencyMatrix
+from Graphs.adjacency_list import AdjacencyList
 from Graphs.GraphFactory import build_graph_from_file
 
 
@@ -40,9 +41,15 @@ def average_degree(graph: AdjacencyMatrix):
 
 if __name__ == '__main__':
     file_name = sys.argv[1]
+    graph_type = sys.argv[2]
     this = SimpleNamespace()
-    this.graph = build_graph_from_file('sample_graph.txt', AdjacencyMatrix)
+    graph_types = {
+        'AdjacencyMatrix': AdjacencyMatrix,
+        'AdjacencyList': AdjacencyList
+    }
+    this.graph = build_graph_from_file('sample_graph.txt', graph_types[graph_type])
     print('degree of V0: {}'.format(degree(this.graph, 0)))
     print('max degree: {}'.format(max_degree(this.graph)))
     print('average degree: {}'.format(average_degree(this.graph)))
     print('self loops: {}'.format(self_loops(this.graph)))
+    print('num of edges: {}'.format(this.graph.get_num_edges()))
