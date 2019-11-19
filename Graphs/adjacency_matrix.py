@@ -11,11 +11,9 @@ class AdjacencyMatrix(Graph):
         self.cell_size = cell_size
 
     # will over-write existing edge
-    def add_edge(self, from_vertex, to_vertex, weight):
-        if type(weight) is not int or weight == 0:
-            raise ValueError("weight must be non-zero int")
-        self.matrix[from_vertex][to_vertex] = weight
-        self.matrix[to_vertex][from_vertex] = weight
+    def add_edge(self, from_vertex, to_vertex, **kwargs):
+        self.matrix[from_vertex][to_vertex] = 1
+        self.matrix[to_vertex][from_vertex] = 1
         edge = frozenset({from_vertex, to_vertex})
         self.edges.add(edge)
 

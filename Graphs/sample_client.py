@@ -42,7 +42,7 @@ if __name__ == '__main__':
     file_name = sys.argv[1]
     this = SimpleNamespace()
     this.graph = build_graph_from_file('sample_graph.txt', AdjacencyMatrix)
-    print(degree(this.graph, 0))
-    print(max_degree(this.graph))
-    print(average_degree(this.graph))
-    print(self_loops(this.graph))
+    print('degree of V0: {}'.format(degree(this.graph, 0)))
+    print('max degree: {}'.format(max_degree(this.graph)))
+    print('average degree: {}'.format(average_degree(this.graph)))
+    print('self loops: {}'.format(self_loops(this.graph)))

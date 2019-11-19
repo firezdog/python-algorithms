@@ -15,5 +15,5 @@ class Graph(ABC):
         pass
 
     @abstractmethod
-    def add_edge(self, from_vertex, to_vertex, weight):
+    def add_edge(self, from_vertex, to_vertex, **kwargs):
         pass
