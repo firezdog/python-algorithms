@@ -29,7 +29,7 @@ def self_loops(graph: Graph):
     return loops
 
 
-def average_degree(graph: AdjacencyMatrix):
+def average_degree(graph: Graph):
     sum_deg = 0
     num_vertices = graph.get_num_vertices()
     for vertex in range(num_vertices):

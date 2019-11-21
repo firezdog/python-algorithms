@@ -11,11 +11,10 @@ class Search:
         """ Is a given vertex connected to the source? """
         # initial pass -- check if vertex is in adj(source)
         adjacent = self.graph.get_adjacent(vertex)
-        for node in adjacent:
-            if node == self.source:
-                return True
-        return False
+        return self.source in adjacent
 
     def count(self) -> int:
         """ How many vertices are connected to the source? (counting self-loops and parallel edges?) """
-        return len(self.graph.get_adjacent(self.source))
+        adj_to_source = self.graph.get_adjacent(self.source)
+        # source only needs to be connected to every OTHER vertex (self loops are allowed but not required)
+        return len(adj_to_source) + 1
