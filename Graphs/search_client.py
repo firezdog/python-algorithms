@@ -7,6 +7,11 @@ from Graphs.search import Search
 
 
 def is_connected(graph: Graph, search: Search) -> bool:
+    connection_report = ''
+    for vertex in range(graph.get_num_vertices()):
+        if search.is_marked(vertex):
+            connection_report += str(vertex) + ' '
+    print(connection_report)
     return search.count() == graph.get_num_vertices()
 
 
