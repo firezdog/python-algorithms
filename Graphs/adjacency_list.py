@@ -1,6 +1,6 @@
 """ Java representation calls for an array of bags of integers, where array indexes correspond to vertices.
 Flexibility of Python allows us to replace bags with arrays.
-Note that whether we use a bag or list, the API doesn't prevent duplicate edges by default.
+Note that whether we use a bag or list, the API doesn't prevent duplicate (parallel) edges by default.
 For the above reason, I use sets instead of lists. """
 from Graphs.Graph import Graph
 

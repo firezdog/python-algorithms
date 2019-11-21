@@ -1,9 +1,7 @@
 import sys
 from types import SimpleNamespace
-
 from Graphs.Graph import Graph
-from Graphs.adjacency_matrix import AdjacencyMatrix
-from Graphs.adjacency_list import AdjacencyList
+from Graphs.graph_types import graph_types
 from Graphs.GraphFactory import build_graph_from_file
 
 
@@ -43,11 +41,7 @@ if __name__ == '__main__':
     file_name = sys.argv[1]
     graph_type = sys.argv[2]
     this = SimpleNamespace()
-    graph_types = {
-        'AdjacencyMatrix': AdjacencyMatrix,
-        'AdjacencyList': AdjacencyList
-    }
-    this.graph = build_graph_from_file('sample_graph.txt', graph_types[graph_type])
+    this.graph = build_graph_from_file(file_name, graph_types[graph_type])
     print('degree of V0: {}'.format(degree(this.graph, 0)))
     print('max degree: {}'.format(max_degree(this.graph)))
     print('average degree: {}'.format(average_degree(this.graph)))
