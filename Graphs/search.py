@@ -17,8 +17,5 @@ class Search:
         return False
 
     def count(self) -> int:
-        """ How many vertices are connected to the source? """
-        # initial pass -- for each vertex in the graph, check whether source is in adj(vertex) and sum
-        # this is slightly inefficient, but caching risks obsolete results (unless we used observer?)
-        vertices = self.graph.get_num_vertices()
-        return sum(x in self.graph.get_adjacent(self.source) for x in range(vertices))
+        """ How many vertices are connected to the source? (counting self-loops and parallel edges?) """
+        return len(self.graph.get_adjacent(self.source))
