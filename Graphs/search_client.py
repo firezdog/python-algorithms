@@ -3,10 +3,10 @@ import sys
 from Graphs import Graph
 from Graphs.graph_types import graph_types
 from Graphs.GraphFactory import build_graph_from_file
-from Graphs.search import Search
+from Graphs.depthfirstsearch import DepthFirstSearch
 
 
-def is_connected(graph: Graph, search: Search) -> bool:
+def is_connected(graph: Graph, search: DepthFirstSearch) -> bool:
     connection_report = ''
     for vertex in range(graph.get_num_vertices()):
         if search.is_marked(vertex):
@@ -20,5 +20,5 @@ if __name__ == '__main__':
     graph_type = sys.argv[2]
     source = int(sys.argv[3])
     client_graph = build_graph_from_file(file_name, graph_types[graph_type])
-    client_search = Search(client_graph, source)
+    client_search = DepthFirstSearch(client_graph, source)
     print(is_connected(client_graph, client_search))

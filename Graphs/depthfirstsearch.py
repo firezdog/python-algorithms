@@ -1,7 +1,7 @@
 from Graphs import Graph
 
 
-class Search:
+class DepthFirstSearch:
     """ Given a source, determine whether an individual vertex is connected to it / how many are connected.
      Here 'connected' does not necessarily mean directly connected! """
     def __init__(self, graph: Graph, source: int):
