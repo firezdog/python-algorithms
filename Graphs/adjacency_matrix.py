@@ -47,8 +47,9 @@ class AdjacencyMatrix(Graph):
         for i, row in enumerate(self.matrix):
             row_header = 'V{}'.format(i)
             rep += '{}{}'.format(row_header, ' ' * (self.cell_size - len(row_header)))
-            for edge in row:
-                rep += str(edge) + ' ' * (self.cell_size - len(str(edge)))
+            for j, edge in enumerate(row):
+                if j > len(row) - i - 2:
+                    rep += str(edge) + ' ' * (self.cell_size - len(str(edge)))
             rep += '\n' if i < len(self.matrix) - 1 else ''
         if print_out:
             print(rep)
