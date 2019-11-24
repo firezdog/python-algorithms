@@ -2,6 +2,7 @@ import csv
 import random
 
 from Graphs.graph_types import graph_types
+from Graphs.Graph import show_graph
 
 
 def build_graph_from_file(file_name, graph_type):
@@ -36,4 +37,7 @@ def build_erdos_renyi_graph(graph_type, vertices, edges):
 
 if __name__ == '__main__':
     chosen_graph_type = graph_types['AdjacencyMatrix']
-    build_erdos_renyi_graph(chosen_graph_type, 4, 100).render()
+    graph = build_erdos_renyi_graph(chosen_graph_type, 6, 100000)
+    print(graph.get_num_edges())
+    print(graph.get_edges())
+    show_graph(graph)
