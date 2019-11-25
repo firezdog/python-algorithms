@@ -37,7 +37,5 @@ def build_erdos_renyi_graph(graph_type, vertices, edges):
 
 if __name__ == '__main__':
     chosen_graph_type = graph_types['AdjacencyMatrix']
-    graph = build_erdos_renyi_graph(chosen_graph_type, 6, 100000)
-    print(graph.get_num_edges())
-    print(graph.get_edges())
+    graph = build_erdos_renyi_graph(chosen_graph_type, 10, 4)
     show_graph(graph)

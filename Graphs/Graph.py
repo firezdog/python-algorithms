@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import networkx as nx
 import matplotlib.pyplot as plt
 
+
 class Graph(ABC):
     @abstractmethod
     def get_num_vertices(self):
