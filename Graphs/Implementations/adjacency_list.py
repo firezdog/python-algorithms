@@ -27,9 +27,5 @@ class AdjacencyList(Graph):
     def add_edge(self, from_vertex, to_vertex, **kwargs):
         edge = frozenset({from_vertex, to_vertex})
         self.edges.add(edge)
-        old_sum = len(self.vertices[from_vertex]) + len(self.vertices[to_vertex])
         self.vertices[from_vertex].add(to_vertex)
         self.vertices[to_vertex].add(from_vertex)
-        new_sum = len(self.vertices[from_vertex]) + len(self.vertices[to_vertex])
-        if new_sum > old_sum:
-            self.edges += 1
