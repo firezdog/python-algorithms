@@ -1,4 +1,4 @@
-from Graphs import Graph
+from Graphs.Implementations import Graph
 
 
 class DepthFirstSearch:

@@ -1,8 +1,8 @@
 import sys
 from types import SimpleNamespace
-from Graphs.Graph import Graph
-from Graphs.graph_types import graph_types
-from Graphs.GraphFactory import build_graph_from_file
+from Graphs.Implementations.Graph import Graph
+from Graphs.Implementations.graph_types import graph_types
+from Graphs.Implementations.GraphFactory import build_graph_from_file
 
 
 # the number of edges at a given node

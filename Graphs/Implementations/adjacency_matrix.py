@@ -1,4 +1,4 @@
-from Graphs.Graph import Graph
+from Graphs.Implementations.Graph import Graph
 
 
 class AdjacencyMatrix(Graph):

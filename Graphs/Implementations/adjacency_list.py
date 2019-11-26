@@ -2,7 +2,7 @@
 Flexibility of Python allows us to replace bags with arrays.
 Note that whether we use a bag or list, the API doesn't prevent duplicate (parallel) edges by default.
 For the above reason, I use sets instead of lists. """
-from Graphs.Graph import Graph
+from Graphs.Implementations.Graph import Graph
 
 
 class AdjacencyList(Graph):

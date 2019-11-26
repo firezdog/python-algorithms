@@ -1,8 +1,8 @@
 import sys
 
-from Graphs import Graph
-from Graphs.graph_types import graph_types
-from Graphs.GraphFactory import build_graph_from_file
+from Graphs.Implementations import Graph
+from Graphs.Implementations.graph_types import graph_types
+from Graphs.Implementations.GraphFactory import build_graph_from_file
 from Graphs.depthfirstsearch import DepthFirstSearch
 
 
