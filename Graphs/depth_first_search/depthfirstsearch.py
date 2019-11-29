@@ -10,6 +10,9 @@ class DepthFirstSearch:
         self.marked = [False] * graph.get_num_vertices()
         self.depth_first_search(source)
 
+    def has_path_to(self, vertex: int):
+        return self.marked[vertex]
+
     def depth_first_search(self, waypoint):
         """ Recursively visit and mark all nodes that can be reached from the source. """
         self.marked[waypoint] = True

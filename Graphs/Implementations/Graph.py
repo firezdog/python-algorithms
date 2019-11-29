@@ -36,5 +36,6 @@ def show_graph(graph: Graph) -> None:
         if len(edge_list) == 1:
             edge_list.append(edge_list[0])
         display_graph.add_edge(edge_list[0], edge_list[1])
-    nx.draw_circular(display_graph)
+    nx.draw_circular(display_graph, node_size=1000)
+    nx.draw_networkx_labels(display_graph, font_size=16, font_color='white', pos=nx.circular_layout(display_graph))
     plt.show()

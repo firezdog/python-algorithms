@@ -19,7 +19,9 @@ if __name__ == '__main__':
     file_name = sys.argv[1]
     graph_type = sys.argv[2]
     source = int(sys.argv[3])
-    client_graph = build_erdos_renyi_graph(graph_types[graph_type], 5, 5)
+    client_graph = build_erdos_renyi_graph(graph_types[graph_type], 5, 2)
     client_search = DepthFirstSearch(client_graph, source)
     Graph.show_graph(client_graph)
     print(is_connected(client_graph, client_search))
+    for vertex in range(client_graph.get_num_vertices()):
+        print('Has path to {}: {}'.format(vertex, client_search.has_path_to(vertex)))
