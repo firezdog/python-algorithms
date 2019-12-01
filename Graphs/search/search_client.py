@@ -1,9 +1,10 @@
 import sys
+from typing import Tuple
 
-from Graphs.Implementations import Graph
+from Graphs.Implementations.Graph import Graph, show_graph
 from Graphs.Implementations.graph_types import graph_types
 from Graphs.Implementations.GraphFactory import build_erdos_renyi_graph
-from Graphs.depth_first_search.depthfirstsearch import DepthFirstSearch
+from Graphs.search.depthfirst import DepthFirstSearch
 
 
 def is_connected(graph: Graph, search: DepthFirstSearch) -> bool:
@@ -18,15 +19,15 @@ def connection_report(graph: Graph, search: DepthFirstSearch) -> str:
     return report if report else 'No connections!'
 
 
-if __name__ == '__main__':
-    file_name = sys.argv[1]
-    graph_type = sys.argv[2]
-    source = int(sys.argv[3])
-    client_graph = build_erdos_renyi_graph(graph_types[graph_type], 10, 8)
-    client_search = DepthFirstSearch(client_graph, source)
-    Graph.show_graph(client_graph)
+def build_search(graph_type: str, source: int, vertices: int, edges: int) -> Tuple[Graph, DepthFirstSearch]:
+    graph = build_erdos_renyi_graph(graph_types[graph_type], vertices, edges)
+    search = DepthFirstSearch(graph, source)
+    return graph, search
+
+
+def show_paths(graph: Graph, search: DepthFirstSearch):
     print('Connected graph? -- {}'.format(is_connected(client_graph, client_search)))
-    print('Source component (excluding source) for source = {}'.format(source))
+    print('Source component (excluding source) for source = {}'.format(in_source))
     print(connection_report(client_graph, client_search))
     for vertex in range(client_graph.get_num_vertices()):
         has_path = client_search.has_path_to(vertex)
@@ -35,4 +36,12 @@ if __name__ == '__main__':
             path = client_search.path_to(vertex)
             path.reverse()
             print(path)
+
+
+if __name__ == '__main__':
+    in_graph_type = sys.argv[1]
+    in_source, in_vertices, in_edges = map(int, sys.argv[2:])
+    client_graph, client_search = build_search(in_graph_type, in_source, in_vertices, in_edges)
+    show_graph(client_graph)
+    show_paths(client_graph, client_search)
 
