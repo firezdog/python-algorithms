@@ -20,15 +20,15 @@ class DepthFirstSearch:
         return self.marked[vertex]
 
     def path_to(self, vertex: int) -> List:
-        if not self.has_path_to(vertex):
-            print("No path from {} to {}".format(self.source, vertex))
-            return list()
         path = list()
-        current_node = vertex
-        while current_node != self.source:
-            path.append(current_node)
-            current_node = self.edge_to[current_node]
-        path.append(self.source)
+        if self.has_path_to(vertex):
+            current_node = vertex
+            while current_node != self.source:
+                path.append(current_node)
+                current_node = self.edge_to[current_node]
+            path.append(self.source)
+        else:
+            print("No path from {} to {}".format(self.source, vertex))
         return path
 
     def depth_first_search(self, waypoint):
