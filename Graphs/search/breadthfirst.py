@@ -2,39 +2,23 @@ from queue import Queue
 from typing import List
 
 from Graphs.Implementations.Graph import Graph
+from Graphs.search.search import Search, SearchStrategy
 
 
-# TODO: make parent class for search (or use strategy pattern?)
-class BreadFirstSearch:
-    def __init__(self, graph: Graph, source: int):
-        self.edge_to = [-1 * graph.get_num_vertices()]
-        self.marked = [False * graph.get_num_vertices()]
-        self.source = source
-        self.breadth_first_search(graph, source)
+class BreadFirstSearch(SearchStrategy):
+    def __init__(self, search: Search):
+        super().__init__(search)
+        self.search = search
+        self.search_graph(search.source)
 
-    def breadth_first_search(self, graph: Graph, source: int) -> None:
+    def search_graph(self, waypoint: int) -> None:
         nodes_to_check = Queue()
-        self.marked[source] = True
-        nodes_to_check.put(self.source)
+        self.search.marked[self.search.source] = True
+        nodes_to_check.put(self.search.source)
         while not nodes_to_check.empty():
             current = nodes_to_check.get()
-            for node in graph.get_adjacent(current):
-                if not self.marked[node]:
-                    self.edge_to[node] = current
-                    self.marked[node] = True
+            for node in self.search.graph.get_adjacent(current):
+                if not self.search.marked[node]:
+                    self.search.edge_to[node] = current
+                    self.search.marked[node] = True
                     nodes_to_check.put(node)
-
-    def has_path_to(self, vertex: int) -> bool:
-        return self.marked[vertex]
-
-    def path_to(self, vertex: int) -> List:
-        path = list()
-        if self.has_path_to(vertex):
-            current_node = vertex
-            while current_node != self.source:
-                path.append(current_node)
-                current_node = self.edge_to[current_node]
-            path.append(self.source)
-        else:
-            print("No path from {} to {}".format(self.source, vertex))
-        return path
