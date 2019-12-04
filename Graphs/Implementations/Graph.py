@@ -1,23 +1,25 @@
 from abc import ABC, abstractmethod
+from typing import Set
+
 import networkx as nx
 import matplotlib.pyplot as plt
 
 
 class Graph(ABC):
     @abstractmethod
-    def get_num_vertices(self):
+    def get_num_vertices(self) -> int:
         pass
 
     @abstractmethod
-    def get_edges(self):
+    def get_edges(self) -> Set[Set[int]]:
         pass
 
     @abstractmethod
-    def get_num_edges(self):
+    def get_num_edges(self) -> int:
         pass
 
     @abstractmethod
-    def get_adjacent(self, vertex):
+    def get_adjacent(self, vertex) -> Set[int]:
         pass
 
     @abstractmethod

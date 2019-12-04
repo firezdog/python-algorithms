@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Type
+from typing import List, Type, Set
 
 from Graphs.Implementations import Graph
 
@@ -24,10 +24,14 @@ class Search:
         self.source = source
         self.search_strategy = search_strategy(self)
 
+    def get_adjacent(self, vertex: int) -> Set[int]:
+        """ wrapper for graph method """
+        return self.graph.get_adjacent(vertex)
+
     def has_path_to(self, vertex: int) -> bool:
         return self.marked[vertex]
 
-    def path_to(self, vertex: int) -> List:
+    def path_to(self, vertex: int) -> List[int]:
         path = list()
         if self.has_path_to(vertex):
             current_node = vertex
@@ -38,6 +42,10 @@ class Search:
         else:
             print("No path from {} to {}".format(self.source, vertex))
         return path
+
+    def mark(self, vertex: int) -> None:
+        self.marked[vertex] = True
+        self.total_marked += 1
 
     def is_marked(self, vertex: int) -> bool:
         """ Is a given vertex connected to the source? """

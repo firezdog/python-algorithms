@@ -9,9 +9,8 @@ class DepthFirstSearch(SearchStrategy):
 
     def search_graph(self, waypoint: int) -> None:
         """ Recursively visit and mark all nodes that can be reached from the source. """
-        self.search.marked[waypoint] = True
-        self.search.total_marked += 1
-        adjacent = self.search.graph.get_adjacent(waypoint)
+        self.search.mark(waypoint)
+        adjacent = self.search.get_adjacent(waypoint)
         for node in adjacent:
             if not self.search.marked[node]:
                 self.search.edge_to[node] = waypoint

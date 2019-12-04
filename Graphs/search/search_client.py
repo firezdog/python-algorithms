@@ -4,8 +4,7 @@ from typing import Tuple
 from Graphs.Implementations.Graph import Graph, show_graph
 from Graphs.Implementations.graph_types import graph_types
 from Graphs.Implementations.GraphFactory import build_erdos_renyi_graph
-from Graphs.search.depthfirst import DepthFirstSearch
-from Graphs.search.breadthfirst import BreadFirstSearch
+from Graphs.search.search_strategies import search_stategies
 from Graphs.search.search import Search
 
 
@@ -21,9 +20,9 @@ def connection_report(graph: Graph, search: Search) -> str:
     return report if report else 'No connections!'
 
 
-def build_search(graph_type: str, source: int, vertices: int, edges: int) -> Tuple[Graph, Search]:
+def build_search(graph_type: str, search_strategy: str, source: int, vertices: int, edges: int) -> Tuple[Graph, Search]:
     graph = build_erdos_renyi_graph(graph_types[graph_type], vertices, edges)
-    search = Search(graph, source, BreadFirstSearch)
+    search = Search(graph, source, search_stategies[search_strategy])
     return graph, search
 
 
@@ -41,9 +40,9 @@ def show_paths(graph: Graph, search: Search):
 
 
 if __name__ == '__main__':
-    in_graph_type = sys.argv[1]
-    in_source, in_vertices, in_edges = map(int, sys.argv[2:])
-    client_graph, client_search = build_search(in_graph_type, in_source, in_vertices, in_edges)
+    in_graph_type, in_search_strategy = sys.argv[1:3]
+    in_source, in_vertices, in_edges = map(int, sys.argv[3:])
+    client_graph, client_search = build_search(in_graph_type, in_search_strategy, in_source, in_vertices, in_edges)
     show_graph(client_graph)
     show_paths(client_graph, client_search)
 

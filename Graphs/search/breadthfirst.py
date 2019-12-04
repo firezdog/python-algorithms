@@ -5,7 +5,7 @@ from Graphs.Implementations.Graph import Graph
 from Graphs.search.search import Search, SearchStrategy
 
 
-class BreadFirstSearch(SearchStrategy):
+class BreadthFirstSearch(SearchStrategy):
     def __init__(self, search: Search):
         super().__init__(search)
         self.search = search
@@ -13,12 +13,12 @@ class BreadFirstSearch(SearchStrategy):
 
     def search_graph(self, waypoint: int) -> None:
         nodes_to_check = Queue()
-        self.search.marked[self.search.source] = True
+        self.search.mark(self.search.source)
         nodes_to_check.put(self.search.source)
         while not nodes_to_check.empty():
             current = nodes_to_check.get()
-            for node in self.search.graph.get_adjacent(current):
+            for node in self.search.get_adjacent(current):
                 if not self.search.marked[node]:
                     self.search.edge_to[node] = current
-                    self.search.marked[node] = True
+                    self.search.mark(node)
                     nodes_to_check.put(node)

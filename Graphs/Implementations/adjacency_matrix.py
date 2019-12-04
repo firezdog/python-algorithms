@@ -2,12 +2,12 @@ from Graphs.Implementations.Graph import Graph
 
 
 class AdjacencyMatrix(Graph):
-    def __init__(self, num_vertices):
+    def __init__(self, num_vertices: int):
         self.cell_size = 6
         self.matrix = [[0 for y in range(num_vertices)] for x in range(num_vertices)]
         self.edges = set()
 
-    def set_render_cell_size(self, cell_size):
+    def set_render_cell_size(self, cell_size: int) -> None:
         self.cell_size = cell_size
 
     # will over-write existing edge
