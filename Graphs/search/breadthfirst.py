@@ -18,7 +18,7 @@ class BreadthFirstSearch(SearchStrategy):
         while not nodes_to_check.empty():
             current = nodes_to_check.get()
             for node in self.search.get_adjacent(current):
-                if not self.search.marked[node]:
+                if not self.search.is_marked(node):
                     self.search.edge_to[node] = current
                     self.search.mark(node)
                     nodes_to_check.put(node)
