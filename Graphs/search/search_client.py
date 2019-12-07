@@ -44,5 +44,5 @@ if __name__ == '__main__':
     in_source, in_vertices, in_edges = map(int, sys.argv[3:])
     client_graph, client_search = build_search(in_graph_type, in_search_strategy, in_source, in_vertices, in_edges)
     show_graph(client_graph)
-    show_paths(client_graph, client_search)
-
+    # show_paths(client_graph, client_search)
+    print(client_search.search_strategy.id)
