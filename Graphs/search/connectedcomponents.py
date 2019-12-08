@@ -20,7 +20,7 @@ class ConnectedComponents(SearchStrategy):
             (search, mark=mark, optional_check=None, immediate=False)   # type: SearchStrategy
         self.search_graph()
 
-    def search_graph(self, current_node: int = 0) -> None:
+    def search_graph(self, current_node: int = 0, prev_node: int = 0) -> None:
         # strategy: go through all the vertices in the graph and perform search,
         # increase num of connected components for each unmarked vertex.
         # N.B. current_node is irrelevant since we go through all

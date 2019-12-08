@@ -12,6 +12,8 @@ class AdjacencyMatrix(Graph):
 
     # will over-write existing edge
     def add_edge(self, from_vertex, to_vertex, **kwargs):
+        if from_vertex == to_vertex:
+            return
         self.matrix[from_vertex][to_vertex] = 1
         self.matrix[to_vertex][from_vertex] = 1
         edge = frozenset({from_vertex, to_vertex})

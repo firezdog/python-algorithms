@@ -11,7 +11,7 @@ class SearchStrategy(ABC):
         pass
 
     @abstractmethod
-    def search_graph(self, waypoint: int) -> None:
+    def search_graph(self, current_node: int, prev_node: int) -> None:
         pass
 
 

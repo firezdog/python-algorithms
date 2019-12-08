@@ -27,6 +27,8 @@ class AdjacencyList(Graph):
         return self.vertices[vertex]
 
     def add_edge(self, from_vertex, to_vertex, **kwargs) -> None:
+        if from_vertex == to_vertex:    # don't allow self-loops
+            return
         edge = frozenset({from_vertex, to_vertex})
         self.edges.add(edge)
         self.vertices[from_vertex].add(to_vertex)

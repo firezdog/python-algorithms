@@ -16,7 +16,7 @@ class BreadthFirstSearch(SearchStrategy):
         if immediate:
             self.search_graph(search.source)
 
-    def search_graph(self, waypoint: int) -> None:
+    def search_graph(self, current_node: int, prev_node: int = None) -> None:
         self.search.mark(self.source)
         self.nodes_to_check.put(self.source)
         while not self.nodes_to_check.empty():
