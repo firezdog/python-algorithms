@@ -12,16 +12,18 @@ class ConnectedComponents(SearchStrategy):
         self.id = [0] * self.num_vertices
         self.count = 0
 
-        def mark(waypoint):
-            search.mark(waypoint)
-            self.id[waypoint] = self.count
+        def mark(current_node):
+            search.mark(current_node)
+            self.id[current_node] = self.count
 
-        self.search_helper = DepthFirstSearch(search, mark, immediate=False)    # type: SearchStrategy
-        self.search_graph(0)
+        self.search_helper = DepthFirstSearch\
+            (search, mark=mark, optional_check=None, immediate=False)   # type: SearchStrategy
+        self.search_graph()
 
-    def search_graph(self, waypoint: int) -> None:
+    def search_graph(self, current_node: int = 0) -> None:
         # strategy: go through all the vertices in the graph and perform search,
         # increase num of connected components for each unmarked vertex.
+        # N.B. current_node is irrelevant since we go through all
         for vertex in range(self.num_vertices):
             if not self.search.is_marked(vertex):
                 self.count += 1

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from collections import Callable
 from typing import List, Type, Set
 
 from Graphs.Implementations import Graph
@@ -6,7 +7,7 @@ from Graphs.Implementations import Graph
 
 class SearchStrategy(ABC):
     @abstractmethod
-    def __init__(self, search):
+    def __init__(self, search, mark: Callable = None, optional_check: Callable = None, immediate=True):
         pass
 
     @abstractmethod
@@ -28,8 +29,9 @@ class Search:
         """ wrapper for graph method """
         return self.graph.get_adjacent(vertex)
 
+    # use edge_to > -1 in case we have marked all components e.g. with CC strategy
     def has_path_to(self, vertex: int) -> bool:
-        return self.marked[vertex]
+        return self.edge_to[vertex] > -1
 
     def path_to(self, vertex: int) -> List[int]:
         path = list()
