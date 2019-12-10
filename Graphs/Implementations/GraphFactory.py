@@ -9,7 +9,7 @@ DATA_DIR = Path(__file__).parent.parent / 'data'
 
 
 def build_graph_from_file(file_name, graph_type):
-    file_path = str(DATA_DIR / 'erdos_renyi.txt')
+    file_path = str(DATA_DIR / file_name)
     with open(file_path) as raw_data:
         built_graph = read_graph_data(raw_data, graph_type)
         return built_graph

@@ -5,13 +5,12 @@ from Graphs.search.search import SearchStrategy
 
 
 class FindLoop(SearchStrategy):
-    def __init__(self, search, mark: Callable = None, optional_check: Callable = None, immediate=True):
+    def __init__(self, search):
         super().__init__(search)
         self.has_loop = False
 
-        def check_has_loop(node_a: int, node_b: int):
-            print("running custom check for {} and {}".format(node_a, node_b))
-            if node_a != node_b:
+        def check_has_loop(prev_node, current_node, next_node):
+            if prev_node != next_node:
                 self.has_loop = True
                 print("Found a loop!")
 

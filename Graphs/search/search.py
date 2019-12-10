@@ -5,18 +5,8 @@ from typing import List, Type, Set
 from Graphs.Implementations import Graph
 
 
-class SearchStrategy(ABC):
-    @abstractmethod
-    def __init__(self, search, mark: Callable = None, optional_check: Callable = None, immediate=True):
-        pass
-
-    @abstractmethod
-    def search_graph(self, current_node: int, prev_node: int) -> None:
-        pass
-
-
 class Search:
-    def __init__(self, graph: Graph, source: int, search_strategy: Type[SearchStrategy]):
+    def __init__(self, graph: Graph, source: int, search_strategy: 'Type[SearchStrategy]'):
         self.graph = graph
         self.total_marked = 0
         self.marked = [False] * graph.get_num_vertices()
@@ -56,3 +46,15 @@ class Search:
     def count(self) -> int:
         """ How many vertices are connected to the source. """
         return self.total_marked
+
+
+class SearchStrategy(ABC):
+    """ What we really need is a distinction between a search strategy like dfs and bfs and the search strategies that
+    build on them, using them as helpers while modifying parts of their functionality. """
+    @abstractmethod
+    def __init__(self, search):
+        pass
+
+    @abstractmethod
+    def search_graph(self, current_node: int, prev_node: int) -> None:
+        pass

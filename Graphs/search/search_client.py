@@ -3,7 +3,7 @@ from typing import Tuple
 
 from Graphs.Implementations.Graph import Graph, show_graph
 from Graphs.Implementations.graph_types import graph_types
-from Graphs.Implementations.GraphFactory import build_erdos_renyi_graph
+from Graphs.Implementations.GraphFactory import build_erdos_renyi_graph, build_graph_from_file
 from Graphs.search.search_strategies import search_stategies
 from Graphs.search.search import Search
 
@@ -22,6 +22,7 @@ def connection_report(graph: Graph, search: Search) -> str:
 
 def build_search(graph_type: str, search_strategy: str, source: int, vertices: int, edges: int) -> Tuple[Graph, Search]:
     graph = build_erdos_renyi_graph(graph_types[graph_type], vertices, edges)
+    # graph = build_graph_from_file('sample_graph.txt', graph_types[graph_type])
     search = Search(graph, source, search_stategies[search_strategy])
     return graph, search
 
