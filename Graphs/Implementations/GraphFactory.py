@@ -24,7 +24,8 @@ def read_graph_data(raw_data, graph_type):
     while data is not None:
         from_v, to_v = data
         new_graph.add_edge(from_v, to_v)
-        data = map(int, next(raw_data).split())
+        data = next(raw_data, None)
+        data = data.split() if data else None
     return new_graph
 
 
@@ -34,7 +35,8 @@ def read_symbol_graph_data(raw_data, graph_type):
     while data is not None:
         from_v, to_v = data
         new_symbol_graph.add_edge(from_v, to_v)
-        data = next(raw_data.split())
+        data = next(raw_data, None)
+        data = data.split() if data else None
     return new_symbol_graph
 
 
