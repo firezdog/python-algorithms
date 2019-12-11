@@ -21,8 +21,9 @@ def connection_report(graph: Graph, search: Search) -> str:
 
 
 def build_search(graph_type: str, search_strategy: str, source: int, vertices: int, edges: int) -> Tuple[Graph, Search]:
-    graph = build_erdos_renyi_graph(graph_types[graph_type], vertices, edges)
-    # graph = build_graph_from_file('sample_graph.txt', graph_types[graph_type])
+    # TODO: refactor so that you can build from file or use erdos_renyi or whatever?
+    # graph = build_erdos_renyi_graph(graph_types[graph_type], vertices, edges)
+    graph = build_graph_from_file('sample_graph.txt', graph_types[graph_type])
     search = Search(graph, source, search_stategies[search_strategy])
     return graph, search
 
