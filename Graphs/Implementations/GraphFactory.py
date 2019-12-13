@@ -22,10 +22,10 @@ def read_graph_data(raw_data, graph_type):
     new_graph = graph_type(n_vertices)
     data = next(raw_data, None)
     while data is not None:
+        data = map(int, data.split())
         from_v, to_v = data
         new_graph.add_edge(from_v, to_v)
         data = next(raw_data, None)
-        data = data.split() if data else None
     return new_graph
 
 
