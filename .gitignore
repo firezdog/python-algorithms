@@ -4,3 +4,4 @@ venv/
 __pycache__/
 sample_graph.txt
 erdos_renyi.txt
+*/data/
