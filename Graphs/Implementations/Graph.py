@@ -44,7 +44,8 @@ def show_graph(graph: Graph) -> None:
     pos = nx.circular_layout(display_graph)
     custom_pos = {}
     for k, v in pos.items():
-        custom_pos[k] = (v[0] - 0.2 * v[0], v[1] - 0.2 * v[1])
+        custom_pos[k] = (v[0] - 0.1 * v[0], v[1] - 0.1 * v[1])
+    plt.subplots()[0].set_tight_layout(False)   # remove tight layout warning by adjusting figure (index 0)
     nx.draw(display_graph, pos)
     nx.draw_networkx_labels(display_graph, custom_pos, font_color='red')
     plt.show()

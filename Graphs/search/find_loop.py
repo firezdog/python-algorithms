@@ -12,7 +12,6 @@ class FindLoop(SearchStrategy):
         def check_has_loop(prev_node, current_node, next_node):
             if prev_node != next_node:
                 self.has_loop = True
-                print("Found a loop!")
 
         self.search_helper = DepthFirstSearch(search, optional_check=check_has_loop)
 
