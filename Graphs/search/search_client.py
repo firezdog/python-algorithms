@@ -29,7 +29,6 @@ def build_search(graph_type: str, search_strategy: str, source: int, vertices: i
 
 def show_paths(graph: Graph, search: Search):
     print('Connected graph? -- {}'.format(is_connected(graph, search)))
-    print('Source component (excluding source) for source = {}'.format(in_source))
     print(connection_report(graph, search))
     for vertex in range(graph.get_num_vertices()):
         has_path = search.has_path_to(vertex)

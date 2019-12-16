@@ -43,7 +43,7 @@ def read_symbol_graph_data(raw_data, graph_type):
 def read_movie_graph_data():
     # This is different enough in format that I'll just have a specialized method.
     # TODO We can figure out how to abstract later
-    file_path = str(DATA_DIR / 'smaller_movies.txt')
+    file_path = str(DATA_DIR / 'movies.txt')
     with open(file_path, encoding='utf-8') as raw_data:
         new_symbol_graph = SymbolGraph()
         data = next(raw_data)
